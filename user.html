@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Santa Matching</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .name-display {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Click the link to see your Secret Santa!</h1>
+    
+    <!-- Display Secret Santa -->
+    <div class="name-display" id="nameDisplay"></div>
+
+    <script>
+        // Hardcoded names for each user index (1 to 8)
+        const names = {
+            1: "John Kennedy",      
+            2: "Sophiya",   
+            3: "Xavier",     
+            4: "Santhi",      
+            5: "Ajay",   
+            6: "Virginiya",   
+            7: "Christopher",    
+            8: "Keziah"  
+        };
+
+        // Function to display the Secret Santa for the selected user
+        function displaySecretSanta() {
+            // Get the user parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const userIndex = urlParams.get('user'); // Get the 'user' query parameter
+
+            // Check if the user index is valid (between 1 and 8)
+            if (userIndex !== null && names[userIndex]) {
+                // Get the name for the user index
+                const userName = names[userIndex];
+
+                // Display the result
+                const nameDisplay = document.getElementById('nameDisplay');
+                nameDisplay.textContent = `your Secret Santa is: ${userName}`;
+            } else {
+                // In case the user parameter is not valid
+                const nameDisplay = document.getElementById('nameDisplay');
+                nameDisplay.textContent = "Invalid link. Please make sure you're using the correct link.";
+            }
+        }
+
+        // Initialize the page on load
+        window.onload = function() {
+            displaySecretSanta();
+        };
+    </script>
+
+</body>
+</html>
